@@ -1,8 +1,18 @@
-import 'package:counter_using_provider_flutter/home.dart';
+import 'package:counter_using_provider_flutter/providers/count_provider.dart';
+import 'package:counter_using_provider_flutter/providers/text_provider.dart';
+import 'package:counter_using_provider_flutter/screens/home_screen.dart';
+// ignore: unused_import
+import 'package:counter_using_provider_flutter/screens/result_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(
+      create: (context) => CountProvider(),
+    ),
+    ChangeNotifierProvider(create: (context) => TextProvider())
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -18,7 +28,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const Home(),
+      home: const HomeScreen(),
     );
   }
 }
